@@ -8,7 +8,7 @@ class comment extends React.Component
     
     return (
       <div>
-        <p><strong>{username}</strong>: {text}</p>
+        <p>{username} : {text}</p>
       </div>
     );
     

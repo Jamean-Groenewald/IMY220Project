@@ -13,7 +13,9 @@ class searchInput extends React.Component
   }
 
   handleInputChange = (event) => 
-    {
+  {
+    event.preventDefault();
+    
     this.setState({ searchTerm: event.target.value }, () => 
     {
       this.props.onSearch(this.state.searchTerm);
@@ -23,12 +25,7 @@ class searchInput extends React.Component
   render() 
   {
     return (
-      <input 
-        type="text" 
-        placeholder="Search..." 
-        value={this.state.searchTerm} 
-        onChange={this.handleInputChange} 
-      />
+      <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleInputChange} />
     );
   }
 }

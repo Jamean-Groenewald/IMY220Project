@@ -15,6 +15,8 @@ class addToPlaylist extends React.Component
 
   handleInputChange = (event) => 
   {
+    event.preventDefault();
+    
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };

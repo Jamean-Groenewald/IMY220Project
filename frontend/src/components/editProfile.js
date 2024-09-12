@@ -15,6 +15,8 @@ class editProfile extends React.Component
 
   handleInputChange = (event) => 
   {
+    event.preventDefault();
+     
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -24,20 +26,9 @@ class editProfile extends React.Component
     return (
       <form>
         
-        <input 
-          type="text" 
-          name="username" 
-          placeholder="Username" 
-          value={this.state.username} 
-          onChange={this.handleInputChange} 
-        />
+        <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} />
 
-        <textarea 
-          name="bio" 
-          placeholder="Bio" 
-          value={this.state.bio} 
-          onChange={this.handleInputChange}
-        />
+        <textarea name="bio" placeholder="Bio" value={this.state.bio} onChange={this.handleInputChange} />
 
         <button type="submit">Save Changes</button>
         

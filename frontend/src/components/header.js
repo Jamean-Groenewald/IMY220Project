@@ -5,12 +5,16 @@ class header extends React.Component
 {
   render() 
   {
+    const playlistID = 123;
+    const profileID = 456;
+
     return (
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
-          <li><Link to="/playlists">Playlists</Link></li>
+          <li><Link to="/">SplashPage</Link></li>
+          <li><Link to="/home">Home</Link></li>
+          <li><Link to= {`/profile/${profileID}`}>Profile</Link></li>
+          <li><Link to= {`/playlist/${playlistID}`}>Playlist</Link></li>
         </ul>
       </nav>
     );

@@ -15,6 +15,8 @@ class addComment extends React.Component
 
   handleInputChange = (event) =>
   {
+    event.preventDefault();
+    
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -24,20 +26,9 @@ class addComment extends React.Component
     return (
       <form>
 
-        <input 
-          type="text" 
-          name="username" 
-          placeholder="Your name" 
-          value={this.state.username} 
-          onChange={this.handleInputChange} 
-        />
+        <input type="text" name="username" placeholder="Your name" value={this.state.username} onChange={this.handleInputChange} />
 
-        <textarea 
-          name="commentText" 
-          placeholder="Add a comment" 
-          value={this.state.commentText} 
-          onChange={this.handleInputChange} 
-        />
+        <textarea name="commentText" placeholder="Add a comment" value={this.state.commentText} onChange={this.handleInputChange} />
 
         <button type="submit">Add Comment</button>
 
