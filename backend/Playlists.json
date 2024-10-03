@@ -1,0 +1,47 @@
+[
+  {
+    "simpleID": 1,
+    "name": "Chill Vibes Playlist",
+    "picture": "link to picture",
+    "genre": "Chillwave",
+    "author": "John Doe",
+    "category": "Relaxation",
+    "hashtag": ["#chill", "#vibes"],
+    "comments": [
+      {
+        "author": "Alice Smith",
+        "content": "Great playlist! Perfect for relaxing."
+      },
+      {
+        "author": "Bob Johnson",
+        "content": "Loved the song selection, very soothing!"
+      }
+    ],
+    "description": "A curated playlist to help you unwind and relax after a long day.",
+    "songs": [1,2,3],
+    "ownerID": 1
+  },
+
+  {
+    "simpleID": 2,
+    "name": "Workout Beats",
+    "picture": "link to picture",
+    "genre": "Electronic",
+    "author": "Jane Doe",
+    "category": "Fitness",
+    "hashtag": ["#workout", "#beats"],
+    "comments": [
+      {
+        "author": "Charlie Adams",
+        "content": "This playlist keeps me going during my workouts!"
+      },
+      {
+        "author": "Dana Lee",
+        "content": "High energy songs, exactly what I needed."
+      }
+    ],
+    "description": "A high-energy playlist designed to keep you pumped during your workout sessions.",
+    "songs": [1,2,3],
+    "ownerID": 2
+  }
+]

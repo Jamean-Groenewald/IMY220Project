@@ -1,0 +1,31 @@
+[
+  {
+    "simpleID": 1,
+    "title": "Blinding Lights",
+    "artist": "The Weeknd",
+    "album": "After Hours",
+    "genre": "Synthwave",
+    "year": 2019,
+    "songLink": "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b"
+  },
+
+  {
+    "simpleID": 2,
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "album": "Future Nostalgia",
+    "genre": "Pop",
+    "year": 2020,
+    "songLink": "https://open.spotify.com/track/463CkQjx2Jw8B9gTqcq1Qf"
+  },
+  
+  {
+    "simpleID": 3,
+    "title": "Bad Guy",
+    "artist": "Billie Eilish",
+    "album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
+    "genre": "Pop",
+    "year": 2019,
+    "songLink": "https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m"
+  }
+]

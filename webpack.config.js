@@ -25,5 +25,9 @@ module.exports = {
             }
         ]
         
+    },
+
+    devServer: {
+        historyApiFallback: true, //so that index.html serves all routes, didn't work without this. 
     }
 }

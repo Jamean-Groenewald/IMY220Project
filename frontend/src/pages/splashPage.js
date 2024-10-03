@@ -70,13 +70,45 @@ class splashPage extends React.Component
     }
   };
 
-  handleLoginSubmit = (event) =>
+  handleLoginSubmit = async (event) =>
   {
     event.preventDefault();
 
     if(this.validateLoginForm())
     {
-      console.log('Login form submitted: ', this.state.username, this.state.password);
+      //console.log('Login form submitted: ', this.state.username, this.state.password);
+      const { username, password } = this.state;
+    
+      try 
+      {
+        const response = await fetch('/api/login',
+        { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        if(response.ok) 
+        {
+          const data = await response.json();
+          //console.log('Login successful', data);
+
+          localStorage.setItem('userId', data.userId); // Save userId to local storage
+
+          window.location.href = '/home'; // Redirect to home page
+        } 
+        else 
+        {
+          const errorData = await response.json();
+          console.error('Login failed:', errorData);
+
+          //console.log("username:", username, "password:", password);
+        }
+      } 
+      catch (error) 
+      {
+        console.error('Error during login request:', error);
+      }
     }
   };
 
@@ -121,13 +153,43 @@ class splashPage extends React.Component
     }
   };
   
-  handleSignUpSubmit = (event) =>
+  handleSignUpSubmit = async (event) =>
   {
     event.preventDefault();
 
     if(this.validateSignUpForm())
     {
-      console.log('sign up form submitted: ', this.state.signUpUser, this.state.signUpPass);
+      //console.log('sign up form submitted: ', this.state.signUpUser, this.state.signUpPass);
+
+      const { signUpUser, signUpPass } = this.state;
+
+      try 
+      {
+        const response = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: signUpUser, password: signUpPass })
+        });
+
+        if(response.ok) 
+        {
+          const data = await response.json();
+          //console.log('Sign up successful', data);
+
+          localStorage.setItem('userId', data.userId); // Save userId to local storage
+
+          window.location.href = '/home'; // Redirect to home page
+        } 
+        else 
+        {
+          const errorData = await response.json();
+          console.error('Sign up failed:', errorData);
+        }
+      } 
+      catch (error) 
+      {
+        console.error('Error during sign up request:', error);
+      }
     }
   };
 

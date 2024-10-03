@@ -1,0 +1,43 @@
+[
+    {
+        "userID": 1,
+        "name": "Jamean Groenewald",
+        "bio": "Music lover and playlist curator. Always looking for new tunes!",
+        "country": "USA",
+        "picture": "link to picture",
+        "followers": [2, 3],
+        "following": [2, 3],
+        "playlist": [1],
+        "username": "Jamean",
+        "password": "securePassword123",
+        "email": "JameanGroenewald@gmail.com"
+    },
+
+    {
+        "userID": 2,
+        "name": "Chloe Goonahsylin",
+        "bio": "Passionate about discovering new genres. Let's connect!",
+        "country": "Spain",
+        "picture": "link to picture",
+        "followers": [1, 3],
+        "following": [1, 3],
+        "playlist": [2],
+        "username": "Chloe",
+        "password": "mySecretPass456",
+        "email": "ChloeGoonahsylin@gmail.com"
+    },
+
+    {
+        "userID": 3,
+        "name": "Stone",
+        "bio": "Here to share my love for music and find new favorites.",
+        "country": "Canada",
+        "picture": "link to picture",
+        "followers": [1, 2],
+        "following": [1, 2],
+        "playlist": [3],
+        "username": "Stone",
+        "password": "password789",
+        "email": "Stone@gmail.com"
+    }
+]  
