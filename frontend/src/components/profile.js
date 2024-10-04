@@ -32,13 +32,19 @@ class profile extends React.Component
           <PlaylistPreview key={index} playlist={playlist} />
         ))} */}
 
-        <h3>{username}</h3>
-        <p>{bio}</p>
-        <h4>Your Playlists</h4>
+        <h3 className="text-2xl font-bold">{username}</h3>
         
-        {playlists.map((playlist, index) => (
-          <PlaylistPreview key={index} playlist={playlist} />
-        ))}
+        <p className="mt-2 text-gray-300">{bio}</p>
+        
+        <h4 className="mt-4 text-xl font-semibold">Your Playlists</h4>
+        
+        {playlists.length > 0 ? (
+          playlists.map((playlist, index) => (
+            <PlaylistPreview key={index} playlist={playlist} />
+          ))
+        ) : (
+          <p className="mt-2 text-gray-400">No playlists available.</p>
+        )}
         
       </div>
     );

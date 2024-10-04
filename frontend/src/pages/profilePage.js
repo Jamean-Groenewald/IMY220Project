@@ -15,26 +15,26 @@ class ProfilePage extends React.Component
 
     this.state = 
     {
-      // username: 'User123',
-      // bio: 'Music lover',
-      // playlists: [
-      //   { name: 'Chill Vibes', addedBy: 'User123', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
-      //   { name: 'Workout Tunes', addedBy: 'User123', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
-      // ],
-      // followers: [
-      //   { username: 'Follower1', bio: 'Fan of jazz' },
-      //   { username: 'Follower2', bio: 'Loves classical music' }
-      // ],
-      // following: [
-      //   { username: 'Following1', bio: 'Rock and roll enthusiast' },
-      //   { username: 'Following2', bio: 'Hip-hop fan' }
-      // ],
+      username: 'User123',
+      bio: 'Music lover',
+      playlists: [
+        { name: 'Chill Vibes', addedBy: 'User123', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
+        { name: 'Workout Tunes', addedBy: 'User123', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
+      ],
+      followers: [
+        { username: 'Follower1', bio: 'Fan of jazz' },
+        { username: 'Follower2', bio: 'Loves classical music' }
+      ],
+      following: [
+        { username: 'Following1', bio: 'Rock and roll enthusiast' },
+        { username: 'Following2', bio: 'Hip-hop fan' }
+      ],
 
-      username: null,
-      bio: null,
-      playlists: [],
-      followers: [],
-      following: [],
+      // username: null,
+      // bio: null,
+      // playlists: [],
+      // followers: [],
+      // following: [],
       
       editing: false
     };
@@ -110,16 +110,16 @@ class ProfilePage extends React.Component
     if (editing) 
     {
       content = (
-        <div>
+        <div className="bg-gray-800 p-6 rounded-lg">
           <EditProfile username={username} bio={bio} />
-          <button onClick={this.toggleEdit}>Cancel</button>
+          <button className="bg-red-500 text-white px-4 py-2 mt-4 rounded hover:bg-red-600" onClick={this.toggleEdit}>Cancel</button>
         </div>
       );
     } 
     else 
     {
       content = (
-        <div>
+        <div className="min-h-screen bg-gray-900 text-white">
           {/* <h3>{username}</h3>
           <p>{bio}</p>
           <button onClick={this.toggleEdit}>Edit Profile</button>
@@ -131,20 +131,21 @@ class ProfilePage extends React.Component
 
           <Header />
           
-          <button onClick={this.toggleEdit}>Edit Profile</button>
+          <div className="container mx-auto p-6">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4" onClick={this.toggleEdit}>Edit Profile</button>
+            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mb-4 ml-4" onClick={this.deleteProfile}>Delete Profile</button>
 
-          <button onClick={this.deleteProfile}>Delete Profile</button>
+            <Profile username={username} bio={bio} playlists={playlists} />
 
-          <Profile username={username} bio = {bio} playlists = {playlists} />
-          
-          <h4>Create a New Playlist</h4>
-          <CreatePlaylist addPlaylist={this.addPlaylist} />
+            <h4 className="text-lg font-semibold mt-6">Create a New Playlist</h4>
+            <CreatePlaylist addPlaylist={this.addPlaylist} />
 
-          <h4>Followers</h4>
-          <FollowerFollowing profiles={followers} />
+            <h4 className="text-lg font-semibold mt-6">Followers</h4>
+            <FollowerFollowing profiles={followers} />
 
-          <h4>Following</h4>
-          <FollowerFollowing profiles={following} />
+            <h4 className="text-lg font-semibold mt-6">Following</h4>
+            <FollowerFollowing profiles={following} />
+          </div>
         </div>
       );
     }

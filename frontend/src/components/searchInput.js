@@ -25,7 +25,7 @@ class searchInput extends React.Component
   render() 
   {
     return (
-      <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleInputChange} />
+      <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleInputChange} className="bg-gray-700 text-white placeholder-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
     );
   }
 }

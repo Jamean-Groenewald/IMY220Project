@@ -64,55 +64,100 @@ class PlaylistPage extends React.Component
 
     const { id } = this.props.params;
 
+    // let content;
+
+    // if(editing)
+    // {
+    //   content = <EditPlaylist playlist={this.state.playlist} onSave={this.handleUpdatePlaylist} />,
+
+    //   <button onClick={this.toggleEdit}>Cancel</button>
+    // }
+    // else
+    // {
+    //   content = (
+    //     <div>
+    //       <Playlist playlist={{ name, addedBy, genre, description, hashtag, songs }} />
+          
+    //       <button onClick={this.toggleEdit}>Edit Playlist</button>
+    //     </div>
+    //   );
+    // }
+
+    // return (
+      
+    //   <div>
+    //     {/* <h3>{name}</h3>
+    //     <p>Added by: {addedBy}</p>
+    //     <p>Genre: {genre}</p>
+    //     <p>{description}</p>
+    //     <h4>Songs</h4>
+
+    //     {songs.map((song, index) => (
+    //       <Song key={index} song={song} />
+    //     ))} */}
+        
+    //     <Header />
+
+    //     {/* <Playlist playlist={{ name, addedBy, genre, description, hashtag, songs }} /> */}
+
+    //     {/* {content}
+
+    //     <AddSong />
+    //     <AddToPlaylist />
+
+    //     <h4>Comments</h4>
+
+    //     {comments.map((comment, index) => (
+    //       <Comment key={index} comment={comment} />
+    //     ))}
+
+    //     <AddComment /> */}
+
+      
+    //   </div>
+    // );
+
     let content;
 
-    if(editing)
+    if (editing) 
     {
-      content = <EditPlaylist playlist={this.state.playlist} onSave={this.handleUpdatePlaylist} />,
-
-      <button onClick={this.toggleEdit}>Cancel</button>
-    }
-    else
+      content = (
+        <div>
+          <EditPlaylist playlist={this.state.playlist} onSave={this.handleUpdatePlaylist} />
+          <button className="bg-red-500 text-white px-4 py-2 mt-4 rounded hover:bg-red-600" onClick={this.toggleEdit}>Cancel</button>
+        </div>
+      );
+    } 
+    else 
     {
       content = (
         <div>
           <Playlist playlist={{ name, addedBy, genre, description, hashtag, songs }} />
-          
-          <button onClick={this.toggleEdit}>Edit Playlist</button>
+          <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600" onClick={this.toggleEdit}>Edit Playlist</button>
         </div>
       );
     }
 
     return (
-      
-      <div>
-        {/* <h3>{name}</h3>
-        <p>Added by: {addedBy}</p>
-        <p>Genre: {genre}</p>
-        <p>{description}</p>
-        <h4>Songs</h4>
-
-        {songs.map((song, index) => (
-          <Song key={index} song={song} />
-        ))} */}
-        
+      <div className="min-h-screen bg-gray-900 text-white">
         <Header />
+        
+        <div className="container mx-auto p-6">
+          {content}
 
-        {/* <Playlist playlist={{ name, addedBy, genre, description, hashtag, songs }} /> */}
+          <AddSong />
+          <AddToPlaylist />
 
-        {content}
+          <h4 className="mt-6 text-lg font-semibold">Comments</h4>
 
-        <AddSong />
-        <AddToPlaylist />
+          <div className="mt-4">
+            {comments.map((comment, index) => (
+              <Comment key={index} comment={comment} />
+            ))}
+          </div>
 
-        <h4>Comments</h4>
-
-        {comments.map((comment, index) => (
-          <Comment key={index} comment={comment} />
-        ))}
-
-        <AddComment />
-
+          <AddComment />
+        </div>
       </div>
     );
   }

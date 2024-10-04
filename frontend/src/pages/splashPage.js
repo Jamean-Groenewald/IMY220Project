@@ -199,38 +199,40 @@ class splashPage extends React.Component
 
     return (
       
-      <div>
-        <h2>Login</h2>
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
         
-        <form onSubmit={this.handleLoginSubmit}>
-          
-          <input type="text" name="username" placeholder="Username" value={username} onChange={this.handleInputChange} />
+        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">
+          <h2 className="text-2xl mb-4 font-bold text-center">Login</h2>
 
-          {errors.username}
+          <form onSubmit={this.handleLoginSubmit} className="space-y-4">
+            <input type="text" name="username" placeholder="Username" value={username} onChange={this.handleInputChange} className="w-full px-4 py-2 bg-gray-700 rounded text-white" />
 
-          <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleInputChange} />
+            {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
 
-          {errors.password}
+            <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleInputChange} className="w-full px-4 py-2 bg-gray-700 rounded text-white" />
 
-          <button type="submit">Login</button>
+            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
 
-        </form>
-        
-        <h2>Sign Up</h2>
-        
-        <form onSubmit={this.handleSignUpSubmit}>
+            <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" >Login</button>
+          </form>          
+        </div>  
 
-          <input type="text" name="signUpUser" placeholder="Username" value={signUpUser} onChange={this.handleInputChange} />
+        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80 mt-8">
+          <h2 className="text-2xl mb-4 font-bold text-center">Sign Up</h2>
 
-          {errors.signUpUser}
+          <form onSubmit={this.handleSignUpSubmit} className="space-y-4">
 
-          <input type="password" name="signUpPass" placeholder="Password" value={signUpPass} onChange={this.handleInputChange}/>
+            <input type="text" name="signUpUser" placeholder="Username" value={signUpUser} onChange={this.handleInputChange} className="w-full px-4 py-2 bg-gray-700 rounded text-white" />
 
-          {errors.signUpPass}
+            {errors.signUpUser && <p className="text-red-500 text-sm">{errors.signUpUser}</p>}
 
-          <button type="submit">Sign Up</button>
-        </form>
+            <input type="password" name="signUpPass" placeholder="Password" value={signUpPass} onChange={this.handleInputChange} className="w-full px-4 py-2 bg-gray-700 rounded text-white" />
 
+            {errors.signUpPass && <p className="text-red-500 text-sm">{errors.signUpPass}</p>}
+
+            <button type="submit" className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" >Sign Up</button>
+          </form>
+        </div>
       </div>
     );
   }

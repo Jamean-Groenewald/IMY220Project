@@ -57,9 +57,7 @@ router.post('/login', async (req, res) =>
                 message: 'invalid sign in'
             });
         }
-        // req.session.user = user;
-        // res.json({ message: 'Login successful', user });
-
+        
         return res.status(200).json({
             status: 'success',
             message: 'Login successful',
@@ -127,39 +125,49 @@ router.get('/users/:userID', async (req, res) =>
 });
 
 // Edit a user profile
-router.put('/users/:userID', async (req, res) => {
+router.put('/users/:userID', async (req, res) => 
+{
     const userID = parseInt(req.params.userID);
     const updatedData = req.body; // contains the fields to be updated
 
-    try {
+    try 
+    {
         const result = await req.app.locals.userCollection.updateOne(
             { userID },
             { $set: updatedData }
         );
 
-        if (result.matchedCount === 0) {
+        if(result.matchedCount === 0) 
+        {
             return res.status(404).json({ message: 'User not found' });
         }
 
         res.json({ message: 'User updated successfully' });
-    } catch (error) {
+    } 
+    catch(error) 
+    {
         res.status(500).json({ message: 'Error updating user', error });
     }
 });
 
 // Delete a user profile
-router.delete('/users/:userID', async (req, res) => {
+router.delete('/users/:userID', async (req, res) => 
+{
     const userID = parseInt(req.params.userID);
 
-    try {
+    try 
+    {
         const result = await req.app.locals.userCollection.deleteOne({ userID });
 
-        if (result.deletedCount === 0) {
+        if(result.deletedCount === 0) 
+        {
             return res.status(404).json({ message: 'User not found' });
         }
 
         res.json({ message: 'User deleted successfully' });
-    } catch (error) {
+    } 
+    catch(error)
+    {
         res.status(500).json({ message: 'Error deleting user', error });
     }
 });

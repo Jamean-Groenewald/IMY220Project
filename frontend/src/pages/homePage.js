@@ -34,14 +34,18 @@ class homePage extends React.Component
     const {searchTerm, inputError} = this.state;
 
     return (
-      <div>
-      
+      <div className="min-h-screen bg-gray-900 text-white">
         <Header />
 
-        <SearchInput onSearch={this.handleSearch} />
-        {inputError}
-        <Feed searchTerm={searchTerm} />
-        
+        <div className="container mx-auto p-6">
+          <SearchInput onSearch={this.handleSearch} />
+
+          {inputError && (
+            <p className="text-red-500 text-sm mt-2">{inputError}</p>
+          )}
+
+          <Feed searchTerm={searchTerm} />
+        </div>
       </div>
     );
   }

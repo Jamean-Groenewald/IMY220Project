@@ -24,13 +24,13 @@ class editProfile extends React.Component
   render() 
   {
     return (
-      <form>
+      <form className="bg-gray-800 p-6 rounded-lg shadow-lg">
         
-        <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} />
+        <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} className="block w-full p-2 mb-4 border border-gray-600 rounded bg-gray-700 text-white placeholder-gray-400" />
 
-        <textarea name="bio" placeholder="Bio" value={this.state.bio} onChange={this.handleInputChange} />
+        <textarea name="bio" placeholder="Bio" value={this.state.bio} onChange={this.handleInputChange} className="block w-full p-2 mb-4 border border-gray-600 rounded bg-gray-700 text-white placeholder-gray-400" />
 
-        <button type="submit">Save Changes</button>
+        <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700" >Save Changes</button>
         
       </form>
     );

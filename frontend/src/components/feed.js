@@ -28,19 +28,30 @@ class feed extends React.Component
    
     return (
       
-      <div>
+      <div className="p-6 bg-gray-800 text-white">
 
-        <h3>Song Feed</h3>
+        <div className="flex justify-between"> {/* to have columns */}
 
-        {songs.map((song, index) => (
-          <Song key={index} song={song} />
-        ))}
+          <div className="w-1/2 pr-4">
 
-        <h3>Playlist Feed</h3>
-        {playlists.map((playlist, index) => (
-          <PlaylistPreview key={index} playlist={playlist} />
-        ))}
+            <h3 className="text-xl font-bold mb-4">Song Feed</h3>
 
+            {songs.map((song, index) => (
+              <Song key={index} song={song} />
+            ))}
+
+          </div>
+
+          <div className="w-1/2 pl-4">
+
+            <h3 className="text-xl font-bold mb-4">Playlist Feed</h3>
+
+            {playlists.map((playlist, index) => (
+              <PlaylistPreview key={index} playlist={playlist} />
+            ))}
+            
+          </div>
+        </div>
       </div>
     );
   }
