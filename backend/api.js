@@ -229,36 +229,76 @@ router.get('/playlists/:playlistID', async (req, res) =>
 });
 
 // Create a new playlist
-router.post('/playlists', async (req, res) => 
+router.post('/playlists/:ownerID', async (req, res) => 
 {
     try 
     {
+        //console.log("Request parameters:", req.params); //debugging
+
+        const ownerID = parseInt(req.params.ownerID);
+
+        //console.log("Parsed ownerID:", ownerID); //debugging
+
         const newPlaylist = req.body;
+
+        // console.log("ownerID:", ownerID); //debugging
+        // console.log("newPlaylist:", newPlaylist); //debugging
+
+        const latestPlaylist = await req.app.locals.playlistCollection
+         .find({})
+         .sort({ playlistID: -1 })
+         .limit(1)
+         .toArray();
+
+        //console.log("latestPlaylist:", latestPlaylist); //debugging
+
+        // console.log("latestID: ", latestPlaylist[0].playlistID); //debugging
+
+        let newPlaylistID;
+
+        if(latestPlaylist.length>0)
+        {
+            newPlaylistID = latestPlaylist[0].playlistID + 1;
+        }
+        else
+        {
+            newPlaylistID = 1;
+        }
+
+        newPlaylist.playlistID = newPlaylistID;
+        newPlaylist.ownerID = ownerID;
+        
+        //console.log("New Playlist after adding ownerID:", newPlaylist); //debugging
 
         const result = await req.app.locals.playlistCollection.insertOne(newPlaylist);
 
-        res.status(201).json(result.ops[0]);
+        await req.app.locals.userCollection.updateOne(
+            { userID: ownerID },
+            { $push: { playlists: newPlaylistID } }
+        );
 
-        return res.status(200).json({
+        return res.status(201).json({
             status: 'success',
             message: 'playlist created',
+            playlist: result.ops[0]
         });
     } 
     catch(error) 
     {
+        //console.error("Error creating playlistzsssss:", error.message || error);
         res.status(500).json({ message: 'Error creating playlist', error });
     }
 });
 
 // Edit a playlist by ID
-router.put('/playlists/:simpleID', async (req, res) => 
+router.put('/playlists/:playlistID', async (req, res) => 
 {
-    const simpleID = parseInt(req.params.simpleID);
+    const playlistID = parseInt(req.params.playlistID);
     const updatedPlaylist = req.body;
 
     try 
     {
-        const result = await req.app.locals.playlistCollection.updateOne({ simpleID }, { $set: updatedPlaylist });
+        const result = await req.app.locals.playlistCollection.updateOne({ playlistID }, { $set: updatedPlaylist });
 
         if(result.matchedCount === 0) 
         {
@@ -274,13 +314,13 @@ router.put('/playlists/:simpleID', async (req, res) =>
 });
 
 // Delete a playlist by ID
-router.delete('/playlists/:simpleID', async (req, res) => 
+router.delete('/playlists/:playlistID', async (req, res) => 
 {
-    const simpleID = parseInt(req.params.simpleID);
+    const playlistID = parseInt(req.params.playlistID);
 
     try 
     {
-        const result = await req.app.locals.playlistCollection.deleteOne({ simpleID });
+        const result = await req.app.locals.playlistCollection.deleteOne({ playlistID });
 
         if(result.deletedCount === 0) 
         {

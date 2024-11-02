@@ -400,35 +400,63 @@ router.get('/playlists/:playlistID', /*#__PURE__*/function () {
 }());
 
 // Create a new playlist
-router.post('/playlists', /*#__PURE__*/function () {
+router.post('/playlists/:ownerID', /*#__PURE__*/function () {
   var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
-    var newPlaylist, result;
+    var ownerID, newPlaylist, latestPlaylist, newPlaylistID, result;
     return _regeneratorRuntime().wrap(function _callee9$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
         case 0:
           _context9.prev = 0;
-          newPlaylist = req.body;
-          _context9.next = 4;
+          //console.log("Request parameters:", req.params); //debugging
+          ownerID = parseInt(req.params.ownerID); //console.log("Parsed ownerID:", ownerID); //debugging
+          newPlaylist = req.body; // console.log("ownerID:", ownerID); //debugging
+          // console.log("newPlaylist:", newPlaylist); //debugging
+          _context9.next = 5;
+          return req.app.locals.playlistCollection.find({}).sort({
+            playlistID: -1
+          }).limit(1).toArray();
+        case 5:
+          latestPlaylist = _context9.sent;
+          if (latestPlaylist.length > 0) {
+            newPlaylistID = latestPlaylist[0].playlistID + 1;
+          } else {
+            newPlaylistID = 1;
+          }
+          newPlaylist.playlistID = newPlaylistID;
+          newPlaylist.ownerID = ownerID;
+
+          //console.log("New Playlist after adding ownerID:", newPlaylist); //debugging
+          _context9.next = 11;
           return req.app.locals.playlistCollection.insertOne(newPlaylist);
-        case 4:
+        case 11:
           result = _context9.sent;
-          res.status(201).json(result.ops[0]);
-          return _context9.abrupt("return", res.status(200).json({
+          _context9.next = 14;
+          return req.app.locals.userCollection.updateOne({
+            userID: ownerID
+          }, {
+            $push: {
+              playlists: newPlaylistID
+            }
+          });
+        case 14:
+          return _context9.abrupt("return", res.status(201).json({
             status: 'success',
-            message: 'playlist created'
+            message: 'playlist created',
+            playlist: result.ops[0]
           }));
-        case 9:
-          _context9.prev = 9;
+        case 17:
+          _context9.prev = 17;
           _context9.t0 = _context9["catch"](0);
+          //console.error("Error creating playlistzsssss:", error.message || error);
           res.status(500).json({
             message: 'Error creating playlist',
             error: _context9.t0
           });
-        case 12:
+        case 20:
         case "end":
           return _context9.stop();
       }
-    }, _callee9, null, [[0, 9]]);
+    }, _callee9, null, [[0, 17]]);
   }));
   return function (_x17, _x18) {
     return _ref9.apply(this, arguments);
@@ -436,18 +464,18 @@ router.post('/playlists', /*#__PURE__*/function () {
 }());
 
 // Edit a playlist by ID
-router.put('/playlists/:simpleID', /*#__PURE__*/function () {
+router.put('/playlists/:playlistID', /*#__PURE__*/function () {
   var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(req, res) {
-    var simpleID, updatedPlaylist, result;
+    var playlistID, updatedPlaylist, result;
     return _regeneratorRuntime().wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
         case 0:
-          simpleID = parseInt(req.params.simpleID);
+          playlistID = parseInt(req.params.playlistID);
           updatedPlaylist = req.body;
           _context10.prev = 2;
           _context10.next = 5;
           return req.app.locals.playlistCollection.updateOne({
-            simpleID: simpleID
+            playlistID: playlistID
           }, {
             $set: updatedPlaylist
           });
@@ -485,17 +513,17 @@ router.put('/playlists/:simpleID', /*#__PURE__*/function () {
 }());
 
 // Delete a playlist by ID
-router["delete"]('/playlists/:simpleID', /*#__PURE__*/function () {
+router["delete"]('/playlists/:playlistID', /*#__PURE__*/function () {
   var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11(req, res) {
-    var simpleID, result;
+    var playlistID, result;
     return _regeneratorRuntime().wrap(function _callee11$(_context11) {
       while (1) switch (_context11.prev = _context11.next) {
         case 0:
-          simpleID = parseInt(req.params.simpleID);
+          playlistID = parseInt(req.params.playlistID);
           _context11.prev = 1;
           _context11.next = 4;
           return req.app.locals.playlistCollection.deleteOne({
-            simpleID: simpleID
+            playlistID: playlistID
           });
         case 4:
           result = _context11.sent;

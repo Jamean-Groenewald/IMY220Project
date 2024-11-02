@@ -18,7 +18,7 @@ class app extends React.Component
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/profile/:userID" element={<ProfilePageParams />} />
-          <Route path="/playlist/:id" element= {<PlaylistPageParams />} />
+          <Route path="/playlist/:playlistID" element= {<PlaylistPageParams />} />
           <Route path="/" element={<SplashPage />} />
         </Routes>
       </BrowserRouter>
