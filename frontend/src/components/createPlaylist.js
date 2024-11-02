@@ -22,11 +22,55 @@ class createPlaylist extends React.Component
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (event) => 
+  handleSubmit = async (event) => 
   {
     event.preventDefault();
+    
+    const { name, genre, category, hashtag, description } = this.state;
+    const { ownerID } = this.props; 
+  
+    const newPlaylist = {
+      name,
+      genre,
+      category,
+      hashtag,
+      description
+    };
+  
+    try 
+    {
+      const response = await fetch(`/api/playlists/${ownerID}`, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPlaylist),
+      });
+  
+      if(response.ok) 
+      {
+        const createdPlaylist = await response.json();
 
-    //console.log("Playlist created:", this.state);
+        this.props.addPlaylist(createdPlaylist);
+
+        this.setState({
+          name: '',
+          genre: '',
+          category: '',
+          hashtag: '',
+          description: ''
+        });
+      } 
+      else 
+      {
+        const error = await response.json();
+        alert(`Error creating playlist: ${error.message}`);
+      }
+    } 
+    catch (error) 
+    {
+      console.error("Error creating playlist:", error);
+    }
   };
 
   render() 

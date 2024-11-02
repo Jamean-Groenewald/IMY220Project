@@ -240,7 +240,7 @@ class ProfilePage extends React.Component
             )}
 
             <h4 className="text-lg font-semibold mt-6">Create a New Playlist</h4>
-            <CreatePlaylist addPlaylist={this.addPlaylist} />
+            <CreatePlaylist addPlaylist={this.addPlaylist} ownerID={this.props.userID} />
 
             {followers.length > 0 && (
               <>
