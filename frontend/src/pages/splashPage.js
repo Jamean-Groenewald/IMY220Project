@@ -91,14 +91,38 @@ class splashPage extends React.Component
         if(response.ok) 
         {
           const data = await response.json();
-          //console.log('Login successful', data);
+          //console.log('Login successful', data); //debugging
 
-          localStorage.setItem('userId', data.userId); // Save userId to local storage
+          //console.log("data.userID" + data.userID); //debugging
+
+          localStorage.setItem('userId', data.user.userID.toString()); // Save userId to local storage
 
           window.location.href = '/home'; // Redirect to home page
+
+          // Check if data.userID is not undefined
+          // if (data.user && data.user.userID) 
+          // {
+          //     localStorage.setItem('userId', data.user.userID.toString()); // Save userId to local storage
+          //     //window.location.href = '/home'; // Redirect to home page
+
+          //     console.log("SUCCESSSSS");
+
+          //     const numberID = parseInt(localStorage.getItem('userId'));
+
+          //     console.log("numberID: " + numberID);
+          // } 
+          // else 
+          // {
+          //     //console.log("Response data:", data); // Log the entire response object
+
+          //     console.error("User ID is undefined");
+          // }
+
         } 
         else 
         {
+          console.error("Login failed with status:", response.status);
+
           const errorData = await response.json();
           console.error('Login failed:', errorData);
 
@@ -176,7 +200,7 @@ class splashPage extends React.Component
           const data = await response.json();
           //console.log('Sign up successful', data);
 
-          localStorage.setItem('userId', data.userId); // Save userId to local storage
+          localStorage.setItem('userId', data.userID); // Save userId to local storage
 
           window.location.href = '/home'; // Redirect to home page
         } 

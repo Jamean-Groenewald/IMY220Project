@@ -16,7 +16,25 @@ router.post('/signup', async (req, res) =>
             return res.status(400).json({ message: 'Username already exists' });
         }
 
+        const latestUser = await req.app.locals.userCollection
+                            .find({})
+                            .sort({userID: -1})
+                            .limit(1)
+                            .toArray();
+        
+        let newUserID;
+
+        if(latestUser.length>0)
+        {
+            newUserID = latestUser[0].userID+1;
+        }
+        else
+        {
+            newUserID = 1;
+        }
+
         const newUser = {
+            userID: newUserID,
             username,
             password
         };
@@ -189,13 +207,13 @@ router.get('/playlists', async (req, res) =>
 });
 
 // Fetch a specific playlist by ID
-router.get('/playlists/:simpleID', async (req, res) => 
+router.get('/playlists/:playlistID', async (req, res) => 
 {
-    const simpleID = parseInt(req.params.simpleID);
+    const playlistID = parseInt(req.params.playlistID);
 
     try 
     {
-        const playlist = await req.app.locals.playlistCollection.findOne({ simpleID });
+        const playlist = await req.app.locals.playlistCollection.findOne({ playlistID });
 
         if(!playlist) 
         {
@@ -220,6 +238,11 @@ router.post('/playlists', async (req, res) =>
         const result = await req.app.locals.playlistCollection.insertOne(newPlaylist);
 
         res.status(201).json(result.ops[0]);
+
+        return res.status(200).json({
+            status: 'success',
+            message: 'playlist created',
+        });
     } 
     catch(error) 
     {

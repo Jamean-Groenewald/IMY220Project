@@ -15,7 +15,7 @@ var router = _express["default"].Router();
 // User Sign-up
 router.post('/signup', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, username, password, existingUser, newUser, result;
+    var _req$body, username, password, existingUser, latestUser, newUserID, newUser, result;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -35,30 +35,42 @@ router.post('/signup', /*#__PURE__*/function () {
             message: 'Username already exists'
           }));
         case 7:
+          _context.next = 9;
+          return req.app.locals.userCollection.find({}).sort({
+            userID: -1
+          }).limit(1).toArray();
+        case 9:
+          latestUser = _context.sent;
+          if (latestUser.length > 0) {
+            newUserID = latestUser[0].userID + 1;
+          } else {
+            newUserID = 1;
+          }
           newUser = {
+            userID: newUserID,
             username: username,
             password: password
           };
-          _context.next = 10;
+          _context.next = 14;
           return req.app.locals.userCollection.insertOne(newUser);
-        case 10:
+        case 14:
           result = _context.sent;
           return _context.abrupt("return", res.status(200).json({
             status: 'success',
             message: 'signup successful'
           }));
-        case 14:
-          _context.prev = 14;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](1);
           res.status(500).json({
             message: 'Error signing up user',
             error: _context.t0.message
           });
-        case 17:
+        case 21:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 14]]);
+    }, _callee, null, [[1, 18]]);
   }));
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
@@ -401,20 +413,22 @@ router.post('/playlists', /*#__PURE__*/function () {
         case 4:
           result = _context9.sent;
           res.status(201).json(result.ops[0]);
-          _context9.next = 11;
-          break;
-        case 8:
-          _context9.prev = 8;
+          return _context9.abrupt("return", res.status(200).json({
+            status: 'success',
+            message: 'playlist created'
+          }));
+        case 9:
+          _context9.prev = 9;
           _context9.t0 = _context9["catch"](0);
           res.status(500).json({
             message: 'Error creating playlist',
             error: _context9.t0
           });
-        case 11:
+        case 12:
         case "end":
           return _context9.stop();
       }
-    }, _callee9, null, [[0, 8]]);
+    }, _callee9, null, [[0, 9]]);
   }));
   return function (_x17, _x18) {
     return _ref9.apply(this, arguments);

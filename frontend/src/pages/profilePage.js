@@ -15,30 +15,74 @@ class ProfilePage extends React.Component
 
     this.state = 
     {
-      username: 'User123',
-      bio: 'Music lover',
-      playlists: [
-        { name: 'Chill Vibes', addedBy: 'User123', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
-        { name: 'Workout Tunes', addedBy: 'User123', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
-      ],
-      followers: [
-        { username: 'Follower1', bio: 'Fan of jazz' },
-        { username: 'Follower2', bio: 'Loves classical music' }
-      ],
-      following: [
-        { username: 'Following1', bio: 'Rock and roll enthusiast' },
-        { username: 'Following2', bio: 'Hip-hop fan' }
-      ],
+      // username: 'User123',
+      // bio: 'Music lover',
+      // playlists: [
+      //   { name: 'Chill Vibes', addedBy: 'User123', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
+      //   { name: 'Workout Tunes', addedBy: 'User123', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
+      // ],
+      // followers: [
+      //   { username: 'Follower1', bio: 'Fan of jazz' },
+      //   { username: 'Follower2', bio: 'Loves classical music' }
+      // ],
+      // following: [
+      //   { username: 'Following1', bio: 'Rock and roll enthusiast' },
+      //   { username: 'Following2', bio: 'Hip-hop fan' }
+      // ],
 
-      // username: null,
-      // bio: null,
-      // playlists: [],
-      // followers: [],
-      // following: [],
+      username: '',
+      bio: '',
+      playlists: [],
+      followers: [],
+      following: [],
       
       editing: false
     };
   }
+
+  componentDidMount()
+  {
+    const { userID } = this.props;
+
+    //console.log("Fetched userID:", userID);
+
+    this.fetchProfileData(userID);
+  }
+
+  fetchProfileData = async (userID) => 
+  {
+    try 
+    {
+      //console.log("Fetching data for userID:", userID); //debugging
+
+      const response = await fetch(`/api/users/${userID}`);
+      
+      if (response.ok) 
+      {
+        const user = await response.json();
+        
+        //console.log("Fetched user data:", user);  //debugging
+
+        //console.log(user.username);
+
+        this.setState({ 
+          username: user.username,
+          bio: user.bio,
+          playlists: user.playlists || [],
+          followers: user.followers || [],
+          following: user.following || []
+        });
+      } 
+      else 
+      {
+        console.error("User not found");
+      }
+    } 
+    catch (error) 
+    {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   toggleEdit = () => 
   {
@@ -50,11 +94,11 @@ class ProfilePage extends React.Component
     this.setState({ playlists: [...this.state.playlists, newPlaylist] });
   };
 
-  deleteProfile = async () => 
+  deleteProfile = async (userID) => 
   {
-    const { id } = this.props.params; 
+    //const { userID } = this.props.params; 
 
-    const response = await fetch(`/api/users/${id}`, {
+    const response = await fetch(`/api/users/${userID}`, {
       method: 'DELETE',
     });
 
@@ -71,9 +115,9 @@ class ProfilePage extends React.Component
   
   editProfile = async (updatedData) => 
   {
-    const { id } = this.props.params;
+    //const { id } = this.props.params;
   
-    const response = await fetch(`/api/users/${id}`, {
+    const response = await fetch(`/api/users/${userID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -84,6 +128,7 @@ class ProfilePage extends React.Component
     if(response.ok) 
     {
       const result = await response.json();
+
       alert(result.message);
 
       this.setState({ 
@@ -103,7 +148,10 @@ class ProfilePage extends React.Component
   {
     const { username, bio, playlists, editing, followers, following } = this.state;
 
-    const { id } = this.props.params;
+    // console.log("Followers in page:", followers);  //debugging
+    // console.log("Following in page:", following);  //debugging
+
+    //const { id } = this.props.params;
 
     let content;
 
@@ -140,11 +188,25 @@ class ProfilePage extends React.Component
             <h4 className="text-lg font-semibold mt-6">Create a New Playlist</h4>
             <CreatePlaylist addPlaylist={this.addPlaylist} />
 
-            <h4 className="text-lg font-semibold mt-6">Followers</h4>
+            {followers.length > 0 && (
+              <>
+                <h4 className="text-lg font-semibold mt-6">Followers</h4>
+                <FollowerFollowing profiles={followers} />
+              </>
+            )}
+
+            {following.length > 0 && (
+              <>
+                <h4 className="text-lg font-semibold mt-6">Following</h4>
+                <FollowerFollowing profiles={following} />
+              </>
+            )}
+
+            {/* <h4 className="text-lg font-semibold mt-6">Followers</h4>
             <FollowerFollowing profiles={followers} />
 
             <h4 className="text-lg font-semibold mt-6">Following</h4>
-            <FollowerFollowing profiles={following} />
+            <FollowerFollowing profiles={following} /> */}
           </div>
         </div>
       );
@@ -156,7 +218,11 @@ class ProfilePage extends React.Component
 
 export default function ProfilePageParams()//profilePage;
 {
-  const params = useParams();
+  // const params = useParams();
 
-  return <ProfilePage params={params} />;
+  // return <ProfilePage params={params} />;
+
+  const { userID } = useParams();
+
+  return <ProfilePage userID = {userID} />
 }
