@@ -356,17 +356,17 @@ router.get('/playlists', /*#__PURE__*/function () {
 }());
 
 // Fetch a specific playlist by ID
-router.get('/playlists/:simpleID', /*#__PURE__*/function () {
+router.get('/playlists/:playlistID', /*#__PURE__*/function () {
   var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
-    var simpleID, playlist;
+    var playlistID, playlist;
     return _regeneratorRuntime().wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          simpleID = parseInt(req.params.simpleID);
+          playlistID = parseInt(req.params.playlistID);
           _context8.prev = 1;
           _context8.next = 4;
           return req.app.locals.playlistCollection.findOne({
-            simpleID: simpleID
+            playlistID: playlistID
           });
         case 4:
           playlist = _context8.sent;

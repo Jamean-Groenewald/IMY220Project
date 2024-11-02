@@ -68,10 +68,14 @@ class ProfilePage extends React.Component
         this.setState({ 
           username: user.username,
           bio: user.bio,
-          playlists: user.playlists || [],
+          //playlists: user.playlists || [],
           followers: user.followers || [],
           following: user.following || []
         });
+
+        //console.log("user.playlists: " + user.playlists); //debugging
+
+        this.fetchPlaylists(user.playlists || []);
       } 
       else 
       {
@@ -81,6 +85,37 @@ class ProfilePage extends React.Component
     catch (error) 
     {
       console.error("Error fetching user data:", error);
+    }
+  };
+
+  fetchPlaylists = async (playlistIDs) => 
+  {
+    for(const playlistID of playlistIDs) 
+    {
+      try 
+      {
+        const response = await fetch(`/api/playlists/${playlistID}`);
+        
+        if(response.ok) 
+        {
+          const playlist = await response.json();
+
+          //console.log("playlists in fetch: " + playlist); //debugging
+
+          // Update playlists array in the state
+          this.setState((prevState) => ({
+            playlists: [...prevState.playlists, playlist]
+          }));
+        } 
+        else 
+        {
+          console.error(`Playlist not found: ${playlistID}`);
+        }
+      } 
+      catch(error) 
+      {
+        console.error(`Error fetching playlist ${playlistID}:`, error);
+      }
     }
   };
 
@@ -105,6 +140,8 @@ class ProfilePage extends React.Component
     if(response.ok) 
     {
       alert('Profile deleted successfully');
+
+      window.location.href = '/';
     } 
     else 
     {
@@ -113,10 +150,21 @@ class ProfilePage extends React.Component
     }
   };
   
+  handleSave = (updatedData) => 
+  {
+    this.editProfile(updatedData);
+    this.toggleEdit();
+  };
+
   editProfile = async (updatedData) => 
   {
+    const { userID } = this.props;
+
     //const { id } = this.props.params;
   
+    // console.log("Updating profile for userID:", userID); //debugging
+    // console.log("Updated Data:", updatedData); //debugging
+
     const response = await fetch(`/api/users/${userID}`, {
       method: 'PUT',
       headers: {
@@ -137,7 +185,8 @@ class ProfilePage extends React.Component
         editing: false 
       });
 
-    } else 
+    } 
+    else 
     {
       const error = await response.json();
       alert(`Error: ${error.message}`);
@@ -148,6 +197,7 @@ class ProfilePage extends React.Component
   {
     const { username, bio, playlists, editing, followers, following } = this.state;
 
+    //console.log("playlists by render: " + playlists); //debugging
     // console.log("Followers in page:", followers);  //debugging
     // console.log("Following in page:", following);  //debugging
 
@@ -159,7 +209,7 @@ class ProfilePage extends React.Component
     {
       content = (
         <div className="bg-gray-800 p-6 rounded-lg">
-          <EditProfile username={username} bio={bio} />
+          <EditProfile username={username} bio={bio} onSave={this.handleSave} />
           <button className="bg-red-500 text-white px-4 py-2 mt-4 rounded hover:bg-red-600" onClick={this.toggleEdit}>Cancel</button>
         </div>
       );
@@ -181,9 +231,13 @@ class ProfilePage extends React.Component
           
           <div className="container mx-auto p-6">
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4" onClick={this.toggleEdit}>Edit Profile</button>
-            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mb-4 ml-4" onClick={this.deleteProfile}>Delete Profile</button>
+            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mb-4 ml-4" onClick={() => this.deleteProfile(this.props.userID)}>Delete Profile</button>
 
-            <Profile username={username} bio={bio} playlists={playlists} />
+            {playlists.length>0 && (
+              <>
+                <Profile username={username} bio={bio} playlists={playlists} />
+              </>
+            )}
 
             <h4 className="text-lg font-semibold mt-6">Create a New Playlist</h4>
             <CreatePlaylist addPlaylist={this.addPlaylist} />

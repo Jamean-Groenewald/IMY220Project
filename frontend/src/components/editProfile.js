@@ -15,16 +15,26 @@ class editProfile extends React.Component
 
   handleInputChange = (event) => 
   {
-    event.preventDefault();
+    //event.preventDefault();
      
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
+  handleSubmit = (event) => 
+  {
+    event.preventDefault();
+    
+    //console.log("Save button clicked"); //debugging
+
+    const { username, bio } = this.state;
+    this.props.onSave({ username, bio }); 
+  };
+
   render() 
   {
     return (
-      <form className="bg-gray-800 p-6 rounded-lg shadow-lg">
+      <form onSubmit={this.handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg">
         
         <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInputChange} className="block w-full p-2 mb-4 border border-gray-600 rounded bg-gray-700 text-white placeholder-gray-400" />
 
