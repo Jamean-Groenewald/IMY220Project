@@ -353,13 +353,13 @@ router.get('/songs', async (req, res) =>
 });
 
 // Fetch a specific song by ID
-router.get('/songs/:simpleID', async (req, res) => 
+router.get('/songs/:songID', async (req, res) => 
 {
-    const simpleID = parseInt(req.params.simpleID);
+    const songID = parseInt(req.params.songID);
 
     try 
     {
-        const song = await req.app.locals.songsCollection.findOne({ simpleID });
+        const song = await req.app.locals.songsCollection.findOne({ songID });
 
         if(!song) 
         {
@@ -374,18 +374,48 @@ router.get('/songs/:simpleID', async (req, res) =>
     }
 });
 
-// Create a new song
-router.post('/songs', async (req, res) => 
+// Create a new song in a specific playlist
+router.post('/songs/:playlistID', async (req, res) => 
 {
     try 
     {
+        const playlistID = parseInt(req.params.playlistID);
         const newSong = req.body;
+
+        const latestSong = await req.app.locals.songsCollection
+            .find({})
+            .sort({ songID: -1 })
+            .limit(1)
+            .toArray();
+
+        let newSongID;
+
+        if(latestSong.length > 0) 
+        {
+            newSongID = latestSong[0].songID + 1;
+        } 
+        else 
+        {
+            newSongID = 1;
+        }
+
+        newSong.songID = newSongID;
+        newSong.playlistID = playlistID;
 
         const result = await req.app.locals.songsCollection.insertOne(newSong);
 
-        res.status(201).json(result.ops[0]);
+        await req.app.locals.playlistCollection.updateOne(
+            { playlistID: playlistID },
+            { $push: { songs: newSongID } }
+        );
+
+        return res.status(201).json({
+            status: 'success',
+            message: 'Song created',
+            song: result.ops[0]
+        });
     } 
-    catch(error) 
+    catch (error) 
     {
         res.status(500).json({ message: 'Error creating song', error });
     }

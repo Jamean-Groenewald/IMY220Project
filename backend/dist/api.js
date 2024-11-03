@@ -594,17 +594,17 @@ router.get('/songs', /*#__PURE__*/function () {
 }());
 
 // Fetch a specific song by ID
-router.get('/songs/:simpleID', /*#__PURE__*/function () {
+router.get('/songs/:songID', /*#__PURE__*/function () {
   var _ref13 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee13(req, res) {
-    var simpleID, song;
+    var songID, song;
     return _regeneratorRuntime().wrap(function _callee13$(_context13) {
       while (1) switch (_context13.prev = _context13.next) {
         case 0:
-          simpleID = parseInt(req.params.simpleID);
+          songID = parseInt(req.params.songID);
           _context13.prev = 1;
           _context13.next = 4;
           return req.app.locals.songsCollection.findOne({
-            simpleID: simpleID
+            songID: songID
           });
         case 4:
           song = _context13.sent;
@@ -637,34 +637,59 @@ router.get('/songs/:simpleID', /*#__PURE__*/function () {
   };
 }());
 
-// Create a new song
-router.post('/songs', /*#__PURE__*/function () {
+// Create a new song in a specific playlist
+router.post('/songs/:playlistID', /*#__PURE__*/function () {
   var _ref14 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee14(req, res) {
-    var newSong, result;
+    var playlistID, newSong, latestSong, newSongID, result;
     return _regeneratorRuntime().wrap(function _callee14$(_context14) {
       while (1) switch (_context14.prev = _context14.next) {
         case 0:
           _context14.prev = 0;
+          playlistID = parseInt(req.params.playlistID);
           newSong = req.body;
-          _context14.next = 4;
-          return req.app.locals.songsCollection.insertOne(newSong);
-        case 4:
-          result = _context14.sent;
-          res.status(201).json(result.ops[0]);
+          _context14.next = 5;
+          return req.app.locals.songsCollection.find({}).sort({
+            songID: -1
+          }).limit(1).toArray();
+        case 5:
+          latestSong = _context14.sent;
+          if (latestSong.length > 0) {
+            newSongID = latestSong[0].songID + 1;
+          } else {
+            newSongID = 1;
+          }
+          newSong.songID = newSongID;
+          newSong.playlistID = playlistID;
           _context14.next = 11;
-          break;
-        case 8:
-          _context14.prev = 8;
+          return req.app.locals.songsCollection.insertOne(newSong);
+        case 11:
+          result = _context14.sent;
+          _context14.next = 14;
+          return req.app.locals.playlistCollection.updateOne({
+            playlistID: playlistID
+          }, {
+            $push: {
+              songs: newSongID
+            }
+          });
+        case 14:
+          return _context14.abrupt("return", res.status(201).json({
+            status: 'success',
+            message: 'Song created',
+            song: result.ops[0]
+          }));
+        case 17:
+          _context14.prev = 17;
           _context14.t0 = _context14["catch"](0);
           res.status(500).json({
             message: 'Error creating song',
             error: _context14.t0
           });
-        case 11:
+        case 20:
         case "end":
           return _context14.stop();
       }
-    }, _callee14, null, [[0, 8]]);
+    }, _callee14, null, [[0, 17]]);
   }));
   return function (_x27, _x28) {
     return _ref14.apply(this, arguments);

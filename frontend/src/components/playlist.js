@@ -39,11 +39,11 @@ class playlist extends React.Component
 
         <p className="text-lg">Hashtag: <span className="font-semibold">{hashtag}</span></p>
 
-        <h4 className="text-xl font-semibold mt-4">Songs</h4>
+        {/* <h4 className="text-xl font-semibold mt-4">Songs</h4> */}
         
-        {songs.map((song, index) => (
+        {/* {songs.map((song, index) => (
           <Song key={index} song={song} />
-        ))}
+        ))} */}
         
       </div>
     );

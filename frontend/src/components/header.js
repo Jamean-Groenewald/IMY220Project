@@ -5,7 +5,7 @@ class header extends React.Component
 {
   render() 
   {
-     const playlistID = 123;
+     //const playlistID = 123;
      const profileID = parseInt(localStorage.getItem('userId'));
 
      //console.log(profileID);
@@ -23,7 +23,7 @@ class header extends React.Component
           </li>
           
           <li>
-            <Link to={`/playlist/${playlistID}`} className="text-white hover:text-blue-400 transition duration-200">Playlist</Link>
+            <Link to={`/playlists/:playlistID`} className="text-white hover:text-blue-400 transition duration-200">Playlist</Link>
           </li>
 
           <li>

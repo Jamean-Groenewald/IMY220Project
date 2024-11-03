@@ -1,5 +1,6 @@
 import React from 'react';
 import PlaylistPreview from './playlistPreview';
+import { Link } from 'react-router-dom';
 
 class profile extends React.Component 
 {
@@ -16,6 +17,24 @@ class profile extends React.Component
     //     { name: 'Workout Tunes', addedBy: 'User123', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
     //   ]
     // };
+  }
+
+  renderPlaylists() 
+  {
+    const { playlists } = this.props;
+
+    if(playlists.length > 0) 
+    {
+      return playlists.map((playlist, index) => (
+        <Link to={`/playlists/${playlist.playlistID}`} key={index}>
+          <PlaylistPreview playlist={playlist} />
+        </Link>
+      ));
+    } 
+    else 
+    {
+      return <p className="mt-2 text-gray-400">No playlists available.</p>;
+    }
   }
 
   render() 
@@ -38,14 +57,16 @@ class profile extends React.Component
         
         <h4 className="mt-4 text-xl font-semibold">Your Playlists</h4>
         
-        {playlists.length > 0 ? (
+        {/* {playlists.length > 0 ? (
           playlists.map((playlist, index) => (
             <PlaylistPreview key={index} playlist={playlist} />
           ))
         ) : (
           <p className="mt-2 text-gray-400">No playlists available.</p>
-        )}
+        )} */}
         
+        {this.renderPlaylists()}
+
       </div>
     );
   }

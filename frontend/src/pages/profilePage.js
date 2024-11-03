@@ -6,6 +6,7 @@ import CreatePlaylist from '../components/createPlaylist';
 import { useParams } from 'react-router-dom';
 import Profile from '../components/profile';
 import Header from '../components/header';
+import { Link } from 'react-router-dom';
 
 class ProfilePage extends React.Component 
 {
@@ -218,14 +219,6 @@ class ProfilePage extends React.Component
     {
       content = (
         <div className="min-h-screen bg-gray-900 text-white">
-          {/* <h3>{username}</h3>
-          <p>{bio}</p>
-          <button onClick={this.toggleEdit}>Edit Profile</button>
-
-          <h4>Your Playlists</h4>
-          {playlists.map((playlist, index) => (
-            <PlaylistPreview key={index} playlist={playlist} />
-          ))} */}
 
           <Header />
           
