@@ -1,31 +1,62 @@
 [
   {
-    "simpleID": 1,
-    "title": "Blinding Lights",
-    "artist": "The Weeknd",
-    "album": "After Hours",
-    "genre": "Synthwave",
-    "year": 2019,
-    "songLink": "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b"
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "songID": 1,
+      "playlistID": 1
   },
-
   {
-    "simpleID": 2,
-    "title": "Levitating",
-    "artist": "Dua Lipa",
-    "album": "Future Nostalgia",
-    "genre": "Pop",
-    "year": 2020,
-    "songLink": "https://open.spotify.com/track/463CkQjx2Jw8B9gTqcq1Qf"
+      "title": "Watermelon Sugar",
+      "artist": "Harry Styles",
+      "songID": 2,
+      "playlistID": 1
   },
-  
   {
-    "simpleID": 3,
-    "title": "Bad Guy",
-    "artist": "Billie Eilish",
-    "album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
-    "genre": "Pop",
-    "year": 2019,
-    "songLink": "https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m"
+      "title": "Peaches",
+      "artist": "Justin Bieber",
+      "songID": 3,
+      "playlistID": 1
+  },
+  {
+      "title": "Stay",
+      "artist": "The Kid LAROI & Justin Bieber",
+      "songID": 4,
+      "playlistID": 2
+  },
+  {
+      "title": "Levitating",
+      "artist": "Dua Lipa",
+      "songID": 5,
+      "playlistID": 2
+  },
+  {
+      "title": "Kiss Me More",
+      "artist": "Doja Cat feat. SZA",
+      "songID": 6,
+      "playlistID": 2
+  },
+  {
+      "title": "Lost in Yesterday",
+      "artist": "Tame Impala",
+      "songID": 7,
+      "playlistID": 3
+  },
+  {
+      "title": "Little Dark Age",
+      "artist": "MGMT",
+      "songID": 8,
+      "playlistID": 3
+  },
+  {
+      "title": "Sicko Mode",
+      "artist": "Travis Scott",
+      "songID": 9,
+      "playlistID": 4
+  },
+  {
+      "title": "Goosebumps",
+      "artist": "Travis Scott",
+      "songID": 10,
+      "playlistID": 4
   }
 ]

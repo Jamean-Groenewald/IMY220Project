@@ -1,43 +1,102 @@
 [
     {
         "userID": 1,
-        "name": "Jamean Groenewald",
         "bio": "Music lover and playlist curator. Always looking for new tunes!",
         "country": "USA",
-        "picture": "link to picture",
         "followers": [2, 3],
         "following": [2, 3],
-        "playlist": [1],
+        "playlists": [1, 2],
         "username": "Jamean",
-        "password": "securePassword123",
-        "email": "JameanGroenewald@gmail.com"
+        "password": "securePassword123"
     },
-
     {
         "userID": 2,
-        "name": "Chloe Goonahsylin",
-        "bio": "Passionate about discovering new genres. Let's connect!",
-        "country": "Spain",
-        "picture": "link to picture",
-        "followers": [1, 3],
+        "bio": "Guitar enthusiast and indie music fan. Let's jam!",
+        "country": "Canada",
+        "followers": [1],
         "following": [1, 3],
-        "playlist": [2],
-        "username": "Chloe",
-        "password": "mySecretPass456",
-        "email": "ChloeGoonahsylin@gmail.com"
+        "playlists": [3],
+        "username": "Alice",
+        "password": "musicIsLife456"
     },
-
     {
         "userID": 3,
-        "name": "Stone",
-        "bio": "Here to share my love for music and find new favorites.",
-        "country": "Canada",
-        "picture": "link to picture",
-        "followers": [1, 2],
+        "bio": "Hip-hop head and aspiring DJ. Always mixing tracks!",
+        "country": "UK",
+        "followers": [1],
         "following": [1, 2],
-        "playlist": [3],
-        "username": "Stone",
-        "password": "password789",
-        "email": "Stone@gmail.com"
+        "playlists": [4],
+        "username": "Bob",
+        "password": "beatMaster789"
+    },
+    {
+        "userID": 4,
+        "bio": "Classical music aficionado. Find me at the symphony!",
+        "country": "Germany",
+        "followers": [],
+        "following": [5],
+        "playlists": [5],
+        "username": "Carl",
+        "password": "classicalVibes321"
+    },
+    {
+        "userID": 5,
+        "bio": "EDM lover and festival-goer. Live for the bass drops!",
+        "country": "Australia",
+        "followers": [4],
+        "following": [],
+        "playlists": [6],
+        "username": "Eva",
+        "password": "dropTheBass654"
+    },
+    {
+        "userID": 6,
+        "bio": "Pop music fanatic. Always looking for the next big hit!",
+        "country": "USA",
+        "followers": [1],
+        "following": [2],
+        "playlists": [7],
+        "username": "Grace",
+        "password": "popQueen987"
+    },
+    {
+        "userID": 7,
+        "bio": "Rock 'n' roll is my life. Catch me at the next concert!",
+        "country": "UK",
+        "followers": [],
+        "following": [3],
+        "playlists": [8],
+        "username": "Harry",
+        "password": "rockStar159"
+    },
+    {
+        "userID": 8,
+        "bio": "Jazz lover and vinyl collector. Let's groove!",
+        "country": "France",
+        "followers": [1, 5],
+        "following": [],
+        "playlists": [9],
+        "username": "Isabelle",
+        "password": "jazzHands753"
+    },
+    {
+        "userID": 9,
+        "bio": "Country music devotee. Living life one song at a time!",
+        "country": "USA",
+        "followers": [],
+        "following": [],
+        "playlists": [10],
+        "username": "Jack",
+        "password": "countryLife852"
+    },
+    {
+        "userID": 10,
+        "bio": "Folk music enthusiast. Storyteller at heart!",
+        "country": "Ireland",
+        "followers": [],
+        "following": [],
+        "playlists": [],
+        "username": "Liam",
+        "password": "folkTunes963"
     }
-]  
+]

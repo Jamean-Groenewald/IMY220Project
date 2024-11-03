@@ -8,23 +8,24 @@ class feed extends React.Component
   {
     super(props);
 
-    this.state = 
-    {
-      songs: [
-        { title: 'Song A', artist: 'Artist 1', dateAdded: '2023-09-01', link: '#' },
-        { title: 'Song B', artist: 'Artist 2', dateAdded: '2023-08-15', link: '#' }
-      ],
+    // this.state = 
+    // {
+      // songs: [
+      //   { title: 'Song A', artist: 'Artist 1', dateAdded: '2023-09-01', link: '#' },
+      //   { title: 'Song B', artist: 'Artist 2', dateAdded: '2023-08-15', link: '#' }
+      // ],
 
-      playlists: [
-        { name: 'Playlist 1', addedBy: 'User1', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
-        { name: 'Playlist 2', addedBy: 'User2', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
-      ]
-    };
+      // playlists: [
+      //   { name: 'Playlist 1', addedBy: 'User1', genre: 'Pop', category: 'Chill', hashtag: '#vibes', description: 'Relaxing tunes' },
+      //   { name: 'Playlist 2', addedBy: 'User2', genre: 'Rock', category: 'Workout', hashtag: '#fitness', description: 'High-energy tracks' }
+      // ]
+    //};
   }
 
   render() 
   {
-    const { songs, playlists } = this.state;
+    // const { allSongs, allPlaylists, searchResults } = this.props;
+    const { allSongs, allPlaylists } = this.props;
    
     return (
       
@@ -36,7 +37,7 @@ class feed extends React.Component
 
             <h3 className="text-xl font-bold mb-4">Song Feed</h3>
 
-            {songs.map((song, index) => (
+            {allSongs.map((song, index) => (
               <Song key={index} song={song} />
             ))}
 
@@ -46,12 +47,25 @@ class feed extends React.Component
 
             <h3 className="text-xl font-bold mb-4">Playlist Feed</h3>
 
-            {playlists.map((playlist, index) => (
+            {allPlaylists.map((playlist, index) => (
               <PlaylistPreview key={index} playlist={playlist} />
             ))}
             
           </div>
         </div>
+
+        {/* {searchResults.length > 0 && (
+          <div className="mt-6">
+            <h3 className="text-xl font-bold mb-4">Search Results</h3>
+            {searchResults.map((result, index) => (
+              result.hasOwnProperty('name') ? ( 
+                <User key={index} user={result} />
+              ) : (
+                <PlaylistPreview key={index} playlist={result} /> 
+              )
+            ))}
+          </div>
+        )} */}
       </div>
     );
   }

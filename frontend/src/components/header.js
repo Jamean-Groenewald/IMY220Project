@@ -13,6 +13,8 @@ class header extends React.Component
     return (
       <nav className="bg-gray-800 py-4">
 
+        <div className="text-white text-3xl font-bold ml-4">SoundSphere</div>
+        
         <ul className="flex justify-center space-x-6">
           <li>
             <Link to="/home" className="text-white hover:text-blue-400 transition duration-200">Home</Link>

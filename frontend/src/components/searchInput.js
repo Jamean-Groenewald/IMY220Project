@@ -8,24 +8,43 @@ class searchInput extends React.Component
 
     this.state = 
     {
-      input: ''
+      input: '',
+      searchType: 'users'
     };
   }
 
-  handleInputChange = (event) => 
+  handleChange = (event) => 
   {
-    event.preventDefault();
-    
-    this.setState({ searchTerm: event.target.value }, () => 
-    {
-      this.props.onSearch(this.state.searchTerm);
-    });
+    this.setState({ input: event.target.value });
+  };
+
+  handleTypeChange = (event) => 
+  {
+    this.setState({ searchType: event.target.value });
+  };
+
+  handleSearch = () => 
+  {
+    const { input, searchType } = this.state;
+    this.props.onSearch(input, searchType);
   };
 
   render() 
   {
+    const {input, searchType} = this.state;
+
     return (
-      <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleInputChange} className="bg-gray-700 text-white placeholder-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+      <div>
+        <input type="text" placeholder="Search..." value={input} onChange={this.handleChange} className="bg-gray-700 text-white placeholder-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+        
+        <select value={searchType} onChange={this.handleTypeChange}>
+          <option value="users">Users</option>
+          <option value="songs">Songs</option>
+          <option value="playlists">Playlists</option>
+        </select>
+        <button onClick={this.handleSearch}>Search</button>
+        
+      </div>
     );
   }
 }

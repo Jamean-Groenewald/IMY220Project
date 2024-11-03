@@ -1,47 +1,112 @@
 [
   {
-    "simpleID": 1,
-    "name": "Chill Vibes Playlist",
-    "picture": "link to picture",
-    "genre": "Chillwave",
-    "author": "John Doe",
-    "category": "Relaxation",
-    "hashtag": ["#chill", "#vibes"],
-    "comments": [
-      {
-        "author": "Alice Smith",
-        "content": "Great playlist! Perfect for relaxing."
-      },
-      {
-        "author": "Bob Johnson",
-        "content": "Loved the song selection, very soothing!"
-      }
-    ],
-    "description": "A curated playlist to help you unwind and relax after a long day.",
-    "songs": [1,2,3],
-    "ownerID": 1
+      "playlistID": 1,
+      "name": "Chill Vibes Playlist",
+      "genre": "Chillwave",
+      "category": "Relaxation",
+      "hashtag": ["#chill", "#vibes"],
+      "comments": [],
+      "description": "A curated playlist to help you unwind and relax after a long day.",
+      "songs": [1, 2, 3],
+      "ownerID": 1
   },
-
   {
-    "simpleID": 2,
-    "name": "Workout Beats",
-    "picture": "link to picture",
-    "genre": "Electronic",
-    "author": "Jane Doe",
-    "category": "Fitness",
-    "hashtag": ["#workout", "#beats"],
-    "comments": [
-      {
-        "author": "Charlie Adams",
-        "content": "This playlist keeps me going during my workouts!"
-      },
-      {
-        "author": "Dana Lee",
-        "content": "High energy songs, exactly what I needed."
-      }
-    ],
-    "description": "A high-energy playlist designed to keep you pumped during your workout sessions.",
-    "songs": [1,2,3],
-    "ownerID": 2
+      "playlistID": 2,
+      "name": "Summer Hits",
+      "genre": "Pop",
+      "category": "Party",
+      "hashtag": ["#summer", "#party"],
+      "comments": [],
+      "description": "The ultimate playlist for your summer parties!",
+      "songs": [4, 5, 6],
+      "ownerID": 1
+  },
+  {
+      "playlistID": 3,
+      "name": "Indie Rock Essentials",
+      "genre": "Indie",
+      "category": "Rock",
+      "hashtag": ["#indie", "#rock"],
+      "comments": [],
+      "description": "A selection of must-hear indie rock tracks.",
+      "songs": [7, 8],
+      "ownerID": 2
+  },
+  {
+      "playlistID": 4,
+      "name": "Hip-Hop Hits",
+      "genre": "Hip-Hop",
+      "category": "Rap",
+      "hashtag": ["#hiphop", "#rap"],
+      "comments": [],
+      "description": "The hottest hip-hop tracks that are ruling the charts.",
+      "songs": [9, 10],
+      "ownerID": 3
+  },
+  {
+      "playlistID": 5,
+      "name": "Classical Masterpieces",
+      "genre": "Classical",
+      "category": "Classical",
+      "hashtag": ["#classical", "#masterpieces"],
+      "comments": [],
+      "description": "Timeless classics from the greatest composers.",
+      "songs": [],
+      "ownerID": 4
+  },
+  {
+      "playlistID": 6,
+      "name": "EDM Festival Playlist",
+      "genre": "EDM",
+      "category": "Dance",
+      "hashtag": ["#edm", "#festival"],
+      "comments": [],
+      "description": "A high-energy playlist to get you pumped for the festival!",
+      "songs": [],
+      "ownerID": 5
+  },
+  {
+      "playlistID": 7,
+      "name": "Pop Favorites",
+      "genre": "Pop",
+      "category": "Pop",
+      "hashtag": ["#pop", "#favorites"],
+      "comments": [],
+      "description": "The latest and greatest in pop music.",
+      "songs": [],
+      "ownerID": 6
+  },
+  {
+      "playlistID": 8,
+      "name": "Classic Rock Anthems",
+      "genre": "Rock",
+      "category": "Rock",
+      "hashtag": ["#rock", "#classics"],
+      "comments": [],
+      "description": "The best classic rock songs to jam out to.",
+      "songs": [],
+      "ownerID": 7
+  },
+  {
+      "playlistID": 9,
+      "name": "Jazz Classics",
+      "genre": "Jazz",
+      "category": "Jazz",
+      "hashtag": ["#jazz", "#classics"],
+      "comments": [],
+      "description": "A collection of the most iconic jazz tracks.",
+      "songs": [],
+      "ownerID": 8
+  },
+  {
+      "playlistID": 10,
+      "name": "Country Road Trip",
+      "genre": "Country",
+      "category": "Country",
+      "hashtag": ["#country", "#roadtrip"],
+      "comments": [],
+      "description": "Perfect country songs for your next road trip.",
+      "songs": [],
+      "ownerID": 9
   }
 ]

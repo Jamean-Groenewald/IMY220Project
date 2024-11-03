@@ -225,6 +225,15 @@ class splashPage extends React.Component
       
       <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
         
+        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80 mb-8 text-center">
+        <h2 className="text-2xl mb-4 font-bold">Welcome to SoundSphere!</h2>
+        <p className="mb-4">
+          A harmonious digital haven where music enthusiasts curate, share, and explore personalised playlists. 
+          Dive into a world of rhythm, melody, and sonic discovery!
+        </p>
+      </div>
+
+      <div className="flex space-x-8">
         <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">
           <h2 className="text-2xl mb-4 font-bold text-center">Login</h2>
 
@@ -237,11 +246,11 @@ class splashPage extends React.Component
 
             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
 
-            <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" >Login</button>
+            <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</button>
           </form>          
         </div>  
 
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80 mt-8">
+        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">
           <h2 className="text-2xl mb-4 font-bold text-center">Sign Up</h2>
 
           <form onSubmit={this.handleSignUpSubmit} className="space-y-4">
@@ -254,9 +263,10 @@ class splashPage extends React.Component
 
             {errors.signUpPass && <p className="text-red-500 text-sm">{errors.signUpPass}</p>}
 
-            <button type="submit" className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" >Sign Up</button>
+            <button type="submit" className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Sign Up</button>
           </form>
         </div>
+      </div>
       </div>
     );
   }

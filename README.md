@@ -3,3 +3,5 @@
 docker build -t u23524121 .
 
 docker run --name u23524121 -p 3000:3000 u23524121
+
+docker run --rm -p 3000:3000 --name u23524121 u23524121
