@@ -8,7 +8,7 @@ class searchInput extends React.Component
 
     this.state = 
     {
-      searchTerm: ''
+      input: ''
     };
   }
 

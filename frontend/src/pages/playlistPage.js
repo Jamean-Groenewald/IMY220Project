@@ -101,6 +101,36 @@ class PlaylistPage extends React.Component
     this.setState({ songs });
   };
 
+  handleDeletePlaylist = async () => 
+  {
+      const { playlist } = this.state;
+
+      if(!playlist) return;
+  
+      const playlistID = playlist.playlistID;
+  
+      try 
+      {
+          const response = await fetch(`/api/playlists/${playlistID}`, {
+              method: 'DELETE',
+          });
+  
+          if (response.ok) 
+          {
+              window.location.href = `/home`;
+          } 
+          else 
+          {
+              console.error(`Error deleting playlist: ${response.statusText}`);
+          }
+      } 
+      catch (error) 
+      {
+          console.error("Error deleting playlist:", error);
+      }
+  };
+    
+
   toggleEdit = () => 
   {
     this.setState({ editing: !this.state.editing });
@@ -147,7 +177,8 @@ class PlaylistPage extends React.Component
             
             <div className="container mx-auto p-6">
               <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4" onClick={this.toggleEdit}>Edit Playlist</button>
-              
+              <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mb-4" onClick={this.handleDeletePlaylist}>Delete Playlist</button>
+
               <Playlist playlist={playlist} />
   
               <h4 className="text-lg font-semibold mt-6">Songs</h4>

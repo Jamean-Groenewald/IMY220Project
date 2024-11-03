@@ -320,13 +320,27 @@ router.delete('/playlists/:playlistID', async (req, res) =>
 
     try 
     {
+        const playlist = await req.app.locals.playlistCollection.findOne({ playlistID });
+
+        if(!playlist) 
+        {
+            return res.status(404).json({ message: 'Playlist not found' });
+        }
+
+        const ownerID = playlist.ownerID;
+
         const result = await req.app.locals.playlistCollection.deleteOne({ playlistID });
 
         if(result.deletedCount === 0) 
         {
             return res.status(404).json({ message: 'Playlist not found' });
         }
-        
+
+        await req.app.locals.userCollection.updateOne(
+            { userID: ownerID },
+            { $pull: { playlists: playlistID } }
+        );
+
         res.json({ message: 'Playlist deleted' });
     } 
     catch(error) 

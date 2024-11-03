@@ -515,19 +515,19 @@ router.put('/playlists/:playlistID', /*#__PURE__*/function () {
 // Delete a playlist by ID
 router["delete"]('/playlists/:playlistID', /*#__PURE__*/function () {
   var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11(req, res) {
-    var playlistID, result;
+    var playlistID, playlist, ownerID, result;
     return _regeneratorRuntime().wrap(function _callee11$(_context11) {
       while (1) switch (_context11.prev = _context11.next) {
         case 0:
           playlistID = parseInt(req.params.playlistID);
           _context11.prev = 1;
           _context11.next = 4;
-          return req.app.locals.playlistCollection.deleteOne({
+          return req.app.locals.playlistCollection.findOne({
             playlistID: playlistID
           });
         case 4:
-          result = _context11.sent;
-          if (!(result.deletedCount === 0)) {
+          playlist = _context11.sent;
+          if (playlist) {
             _context11.next = 7;
             break;
           }
@@ -535,23 +535,47 @@ router["delete"]('/playlists/:playlistID', /*#__PURE__*/function () {
             message: 'Playlist not found'
           }));
         case 7:
+          ownerID = playlist.ownerID;
+          _context11.next = 10;
+          return req.app.locals.playlistCollection.deleteOne({
+            playlistID: playlistID
+          });
+        case 10:
+          result = _context11.sent;
+          if (!(result.deletedCount === 0)) {
+            _context11.next = 13;
+            break;
+          }
+          return _context11.abrupt("return", res.status(404).json({
+            message: 'Playlist not found'
+          }));
+        case 13:
+          _context11.next = 15;
+          return req.app.locals.userCollection.updateOne({
+            userID: ownerID
+          }, {
+            $pull: {
+              playlists: playlistID
+            }
+          });
+        case 15:
           res.json({
             message: 'Playlist deleted'
           });
-          _context11.next = 13;
+          _context11.next = 21;
           break;
-        case 10:
-          _context11.prev = 10;
+        case 18:
+          _context11.prev = 18;
           _context11.t0 = _context11["catch"](1);
           res.status(500).json({
             message: 'Error deleting playlist',
             error: _context11.t0
           });
-        case 13:
+        case 21:
         case "end":
           return _context11.stop();
       }
-    }, _callee11, null, [[1, 10]]);
+    }, _callee11, null, [[1, 18]]);
   }));
   return function (_x21, _x22) {
     return _ref11.apply(this, arguments);
